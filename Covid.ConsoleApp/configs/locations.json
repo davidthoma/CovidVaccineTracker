@@ -1,0 +1,32 @@
+[
+	{
+		"Id": 1,
+		"ZipCode": "19320",
+		"Longitude": -75.814430,
+		"Latitude": 39.996220,
+		"LocationName": "CoatesvillePA",
+		"State": "PA",
+		"CvsLocations": [
+			"CHAMBERSBURG",
+			"ENOLA",
+			"READING",
+			"WEST CHESTER",
+			"YORK"
+		]
+	},
+	{
+		"Id": 2,
+		"ZipCode": "19063",
+		"Longitude": -75.365330,
+		"Latitude": 39.918570,
+		"LocationName": "MediaPA",
+		"State" : "PA",
+		"CvsLocations": [
+			"CHAMBERSBURG",
+			"ENOLA",
+			"READING",
+			"WEST CHESTER",
+			"YORK"
+		]
+	}
+]

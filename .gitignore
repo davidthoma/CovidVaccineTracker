@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Covid.ConsoleApp/Properties/.DS_Store
+Covid.ConsoleApp/Stores/.DS_Store
+Covid.ConsoleApp/.DS_Store
