@@ -49,7 +49,7 @@ namespace Covid.ConsoleApp.Stores.Walgreens
                 ServiceId = "99",
                 Position = new Position() { Latitude = location.Latitude, Longitude = location.Longitude },
                 AppointmentAvailability = new AppointmentAvailability() { StartDateTime = DateTime.Now.ToString("yyyy-MM-dd") },
-                Radius = 10
+                Radius = Settings.StoreSearchRadius
             };
 
             var result = walgreensClient.GetAvailabilityResponse(request);

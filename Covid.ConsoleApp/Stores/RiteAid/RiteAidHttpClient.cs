@@ -32,7 +32,8 @@ namespace Covid.ConsoleApp.Stores.RiteAid
 
         public List<string> GetStores(Location location)
         {
-            var uri = $"https://www.riteaid.com/services/ext/v2/stores/getStores?address={location.ZipCode}&attrFilter=PREF-112&fetchMechanismVersion=2&radius=10";
+            var uri =
+                $"https://www.riteaid.com/services/ext/v2/stores/getStores?address={location.ZipCode}&attrFilter=PREF-112&fetchMechanismVersion=2&radius={Settings.StoreSearchRadius}";
             var response = client.GetAsync(uri).Result;
             var result = response.Content.ReadAsStringAsync().Result;
             var results = JsonConvert.DeserializeObject<RiteAidStoreResponse>(result);

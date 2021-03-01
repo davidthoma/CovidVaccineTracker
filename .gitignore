@@ -358,3 +358,5 @@ Covid.ConsoleApp/.DS_Store
 .idea/.idea.Covid/.idea/riderModule.iml
 .idea/.idea.Covid/.idea/vcs.xml
 .idea/
+Covid.ConsoleApp/configs/pushover.config.thoma.json
+.DS_Store

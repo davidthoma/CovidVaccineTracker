@@ -7,12 +7,13 @@ namespace Covid.ConsoleApp
     {
         private static string _pushoverConfigFileName = "configs/pushover.config.json";
         private static string _locationsFileName = "configs/locations.json";
+        private static int _storeRadius = 50;
 
         private static void Main(string[] args)
         {
             ParseArgs(args);
 
-            new Settings(_pushoverConfigFileName, _locationsFileName).LoadSettings();
+            new Settings(_pushoverConfigFileName, _locationsFileName, _storeRadius).LoadSettings();
 
             var notificationEngine = new Pushover(Settings.PushoverConfig.AppKey)
                 {DefaultUserGroupSendKey = Settings.PushoverConfig.UserGroupKey};
@@ -61,6 +62,15 @@ namespace Covid.ConsoleApp
                             _pushoverConfigFileName = args[++i];
                         }
                         break;
+
+                    case "--radius":
+                        if (i + 1 == args.Length || !int.TryParse(args[++i], out _storeRadius))
+                        {
+                            Console.WriteLine("Invalid arguments provided ");
+                            PrintUsage();
+                            Environment.Exit(1);
+                        }
+                        break;
                 }
             }
         }
@@ -70,6 +80,7 @@ namespace Covid.ConsoleApp
             Console.WriteLine("Usage: ");
             Console.WriteLine("--locations <file> : name and location of the locations config");
             Console.WriteLine("--pushoverConfig <file> : name and location of the Pushover config");
+            Console.WriteLine("--radius <number> : store search radius in miles. Default is 50");
         }
     }
 }
