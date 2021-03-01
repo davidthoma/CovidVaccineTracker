@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Covid.ConsoleApp.Models;
 using Covid.ConsoleApp.Stores.CVS;
@@ -15,9 +16,13 @@ namespace Covid.ConsoleApp
 
         internal delegate void dgAvailabilityFound(string storeName, Location location, string notes);
 
+        private static Dictionary<string, DateTime> mostRecentAvailability;
+
         internal PollerManager(Pushover notificationEngine)
         {
             this.notificationEngine = notificationEngine;
+
+            mostRecentAvailability ??= new Dictionary<string, DateTime>();
         }
 
         internal void BeginPolling()
@@ -47,9 +52,23 @@ namespace Covid.ConsoleApp
 
         private void OnAvailabilityFound(string storeName, Location location, string notes)
         {
+            if (IsDuplicateAppointment(storeName, location.LocationName)) return;
+
             var msgBody = $"*** {storeName} has vaccine appts available in {location.LocationName} {notes}";
             Console.WriteLine(msgBody);
             notificationEngine.Push("VACCINE CHECKER", msgBody);
+        }
+
+        private static bool IsDuplicateAppointment(string storeName, string locationName)
+        {
+            var key = storeName + "-" + locationName;
+            if (mostRecentAvailability.ContainsKey(key) && mostRecentAvailability[key].AddMinutes(10) >= DateTime.Now)
+            {
+                Console.WriteLine($"Skipping duplicate appointment at {storeName} {locationName}");
+                return true;
+            }
+            mostRecentAvailability[key] = DateTime.Now;
+            return false;
         }
     }
 }

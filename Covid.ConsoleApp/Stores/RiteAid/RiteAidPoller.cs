@@ -39,7 +39,7 @@ namespace Covid.ConsoleApp.Stores.RiteAid
                     Console.WriteLine(ex.StackTrace);
                 }
 
-                Thread.Sleep(2 * 60 * 1000);
+                Thread.Sleep(1 * 60 * 1000);
             }
         }
 
